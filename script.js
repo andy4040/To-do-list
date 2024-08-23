@@ -1,0 +1,194 @@
+
+
+let focusTime=40;
+let seconds = "00"
+window.onload = () => {
+    document.getElementById('minutes').innerHTML = focusTime;
+    document.getElementById('seconds').innerHTML = seconds;  
+}
+function start() {
+    const alarmSound = document.getElementById('alarmSound');
+    seconds=59;
+    let focusMinutes = focusTime-1;
+    
+    let timerFunction = () => {
+        seconds= seconds<10 ? '0'+seconds:seconds;
+        document.getElementById('minutes').innerHTML = focusMinutes;
+        document.getElementById('seconds').innerHTML = seconds;
+        document.title = `${focusMinutes}분 ${seconds}초`;
+        seconds = seconds - 1;
+        
+        if(seconds === -1){
+            
+            focusMinutes = focusMinutes - 1;
+            seconds=59;
+            seconds=focusMinutes<0 ? 0: seconds;
+            focusMinutes=focusMinutes<0 ? 0 : focusMinutes;
+        }
+        if (focusMinutes == 0 && seconds == 0){
+            alarmSound.play();
+            
+        }
+    }    
+    setInterval(timerFunction, 1000);
+}
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const input = document.querySelector('input');
+    const notCompleted = document.querySelector('.notCompleted');
+    const lists = [];
+
+    const btn = document.getElementById('addList');
+    btn.addEventListener("click", addList);
+
+    // 페이지 로드 시 저장된 목록 불러오기
+    const storedLists = localStorage.getItem('lists');
+    if (storedLists) {
+        lists.push(...JSON.parse(storedLists));
+        lists.forEach(list => {
+            const newLi = createListItem(list.text, list.checked);
+            notCompleted.appendChild(newLi);
+        });
+        updateStats();
+    }
+
+    function addList() {
+        if (input.value.trim() === '') {
+            alert("할 일을 입력해주세요!");
+            return;
+        }
+
+        const newLi = createListItem(input.value.trim(), false);
+        input.value = "";
+        notCompleted.appendChild(newLi);
+
+        lists.push({ text: newLi.textContent.trim(), checked: false });
+        saveLists();
+        updateStats();
+    }
+
+    function createListItem(text, checked) {
+        const newLi = document.createElement('li');
+        const checkBtn = document.createElement('button');
+        const delBtn = document.createElement('button');
+        const editBtn = document.createElement('button');
+
+        checkBtn.innerHTML = "<i class='fa fa-check'></i>";
+        delBtn.innerHTML = "<i class='fa fa-trash'></i>";
+        editBtn.innerHTML = "<i class='fa fa-pencil'></i>";
+
+        newLi.textContent = text;
+        if (checked) newLi.classList.add('checked');
+        newLi.appendChild(checkBtn);
+        newLi.appendChild(delBtn);
+        newLi.appendChild(editBtn);
+
+        checkBtn.addEventListener('click', function (e) {
+            const item = e.target.closest('li');
+            const listItemText = item.textContent.trim();
+            const listItem = lists.find(list => list.text === listItemText);
+            if (listItem) {
+                listItem.checked = !listItem.checked;
+            }
+            item.classList.toggle('checked');
+            saveLists();
+            updateStats();
+        });
+
+        delBtn.addEventListener('click', function () {
+            const parent = this.parentNode;
+            parent.remove();
+            lists.splice(lists.findIndex(list => list.text === parent.textContent.trim()), 1);
+            saveLists();
+            updateStats();
+        });
+
+        editBtn.addEventListener('click', function () {
+            const parent = this.parentNode;
+            const inputList = document.getElementById('inputList');
+            const listText = parent.textContent.trim();
+            inputList.value = listText;
+            parent.remove();
+            const listIndex = lists.findIndex(list => list.text === listText);
+            if (listIndex !== -1) {
+                lists.splice(listIndex, 1);
+            }
+            saveLists();
+            updateStats();
+        });
+
+        return newLi;
+    }
+
+    function saveLists() {
+        localStorage.setItem('lists', JSON.stringify(lists));
+    }
+
+    function updateStats() {
+        const completedLists = lists.filter(list => list.checked).length;
+        const totalLists = lists.length;
+        const progress = totalLists ? (completedLists / totalLists) * 100 : 0;
+        const progressBar = document.getElementById('progress');
+        progressBar.style.width = `${progress}%`;
+        if (totalLists && completedLists === totalLists) {
+            blaskHappy();
+        }
+    }
+
+    input.addEventListener('keyup', (e) => {
+        if (e.keyCode === 13) {
+            addList();
+        }
+    });
+});
+
+
+
+
+
+
+const blaskHappy=()=>{
+    const count = 200,
+      defaults = {
+        origin: { y: 0.7 },
+      };
+
+    function fire(particleRatio, opts) {
+          confetti(
+            Object.assign({}, defaults, opts, {
+              particleCount: Math.floor(count * particleRatio),
+            })
+          );
+        }
+
+        fire(0.25, {
+          spread: 26,
+          startVelocity: 55,
+        });
+
+        fire(0.2, {
+          spread: 60,
+        });
+
+        fire(0.35, {
+          spread: 100,
+          decay: 0.91,
+          scalar: 0.8,
+        });
+
+        fire(0.1, {
+          spread: 120,
+          startVelocity: 25,
+          decay: 0.92,
+          scalar: 1.2,
+        });
+
+        fire(0.1, {
+          spread: 120,
+          startVelocity: 45,
+        });
+};

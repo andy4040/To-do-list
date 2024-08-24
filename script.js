@@ -6,7 +6,7 @@ let timerInterval;
 window.onload = () => {
     loadTimer(); 
     updateDisplay(); 
-    if (focusMinutes !== undefined && seconds !== undefined && (focusMinutes > 0 || seconds > 0)) {
+    if (focusMinutes !== focusTime  && (focusMinutes > 0 || seconds > 0)) {
         start(); 
     }
 };
@@ -74,6 +74,8 @@ function pause(){
         timerInterval = null; 
         saveTimer(); 
     }
+    alarmSound.pause();
+    alarmSound.currentTime = 0;
 }
 function reset() {
     clearInterval(timerInterval);
@@ -82,6 +84,8 @@ function reset() {
     seconds = 0;
     updateDisplay(); 
     clearTimer();
+    alarmSound.pause();
+    alarmSound.currentTime = 0;
 }
 
 

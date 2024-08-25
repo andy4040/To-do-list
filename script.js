@@ -2,18 +2,26 @@ let focusTime = 40;
 let seconds;
 let focusMinutes;
 let timerInterval;
+let totalTime = 0;
+let totalHours;
+let totalMinutes;
 
 window.onload = () => {
     loadTimer(); 
     updateDisplay(); 
+    updateTotalDisplay();
     if (focusMinutes !== focusTime  && (focusMinutes > 0 || seconds > 0)) {
         start(); 
     }
 };
 
 function loadTimer() {
+    
     const storedMinutes = localStorage.getItem('focusMinutes');
     const storedSeconds = localStorage.getItem('seconds');
+    const storedTotalTime=localStorage.getItem('totalTime');
+    const storedTotalHours=localStorage.getItem('totalHours');
+    const storedTotalMinutes=localStorage.getItem('totalMinutes');
     if (storedMinutes !== null && storedSeconds !== null) {
         focusMinutes = parseInt(storedMinutes);
         seconds = parseInt(storedSeconds);
@@ -21,11 +29,18 @@ function loadTimer() {
         focusMinutes = focusTime;
         seconds = 0;
     }
+    totalTime = parseInt(storedTotalTime) || 0;
+    totalHours = parseInt(storedTotalHours) || 0;
+    totalMinutes = parseInt(storedTotalMinutes) || 0;
+   
 }
 
 function saveTimer() {
     localStorage.setItem('focusMinutes', focusMinutes);
     localStorage.setItem('seconds', seconds);
+    localStorage.setItem('totalTime', totalTime);
+    localStorage.setItem('totalHours', totalHours);
+    localStorage.setItem('totalMinutes', totalMinutes);
 }
 
 function clearTimer() {
@@ -33,12 +48,16 @@ function clearTimer() {
     localStorage.removeItem('seconds');
 }
 
+
 function updateDisplay() {
-    // 화면에 타이머 상태 업데이트
     document.getElementById('minutes').innerHTML = focusMinutes;
     document.getElementById('seconds').innerHTML = seconds < 10 ? '0' + seconds : seconds;
     document.title = `${focusMinutes}분 ${seconds < 10 ? '0' + seconds : seconds}초`;
 }
+function updateTotalDisplay() {
+    document.getElementById('totalTime').innerHTML = totalHours+"시간 "+ totalMinutes +"분";
+}
+
 
 function start() {
     const alarmSound = document.getElementById('alarmSound');
@@ -54,6 +73,9 @@ function start() {
         if (seconds < 0) {
             seconds = 59;
             focusMinutes--;
+            totalTime++;
+            totalHours= Math.floor(totalTime/60);
+            totalMinutes= totalTime % 60;
         }
 
         if (focusMinutes < 0) {
@@ -65,6 +87,7 @@ function start() {
         }
 
         updateDisplay(); 
+        updateTotalDisplay();
         saveTimer(); 
     }, 1000); 
 }
@@ -87,6 +110,14 @@ function reset() {
     alarmSound.pause();
     alarmSound.currentTime = 0;
 }
+
+
+
+
+
+
+
+
 
 
 

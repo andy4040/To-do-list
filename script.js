@@ -92,7 +92,7 @@ function start() {
         updateDisplay(); 
         updateTotalDisplay();
         saveTimer(); 
-    }, 1); 
+    }, 1000); 
 }
 function pause(){
     if (timerInterval) {

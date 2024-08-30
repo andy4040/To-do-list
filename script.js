@@ -73,23 +73,26 @@ function start() {
         if (seconds < 0) {
             seconds = 59;
             focusMinutes--;
-            totalTime++;
-            totalHours= Math.floor(totalTime/60);
-            totalMinutes= totalTime % 60;
+           
         }
 
-        if (focusMinutes < 0) {
+        else if (focusMinutes < 0) {
             focusMinutes = 0;
             seconds = 0;
             alarmSound.play(); 
             clearInterval(timerInterval);
             clearTimer(); 
         }
+        else if(seconds==0){
+            totalTime++;
+            totalHours= Math.floor(totalTime/60);
+            totalMinutes= totalTime % 60;
+        }
 
         updateDisplay(); 
         updateTotalDisplay();
         saveTimer(); 
-    }, 1000); 
+    }, 1); 
 }
 function pause(){
     if (timerInterval) {

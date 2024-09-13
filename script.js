@@ -1,4 +1,4 @@
-let focusTime = 50; 
+let focusTime = 30; 
 let seconds;
 let focusMinutes;
 let timerInterval;

@@ -12,7 +12,10 @@
 </head>
 <body>
     <div class="setting">
-        <a href="#" class="settingBtn" id="settingBtn">Settings</a>
+        <div class="settingContainer">
+            <i class="fa-solid fa-gear"></i>
+            <a href="#" class="settingBtn" id="settingBtn">Settings</a>
+        </div>
     </div>
     <div class="container">
         <div class="timer">
@@ -63,7 +66,7 @@
         <div class="popup-content">
             <img src="https://static.vecteezy.com/system/resources/previews/018/887/462/original/signs-close-icon-png.png" alt="Close" class="close">
             <h2>Timer</h2>
-            <input type="text" placeholder="시간(분)을 입력하세요.">
+            <input type="text" id="timeVar" placeholder="시간(분)을 입력하세요.">
             <button id="saveClose">Save&Close</button>
         </div>
     </div>

@@ -114,9 +114,13 @@ function reset() {
     alarmSound.currentTime = 0;
 }
 
+document.getElementById("settingBtn").addEventListener("click",function(){
+    document.querySelector(".popup").style.display= "flex";
+})
 
-
-
+document.querySelector(".close").addEventListener("click",function(){
+    document.querySelector(".popup").style.display= "none";
+})
 
 
 

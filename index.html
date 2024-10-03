@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +11,9 @@
     <title>오늘 할 일</title>
 </head>
 <body>
+    <div class="setting">
+        <a href="#" class="settingBtn" id="settingBtn">Settings</a>
+    </div>
     <div class="container">
         <div class="timer">
             <div class="circle">
@@ -27,7 +30,7 @@
                 </div>
             </div>
         </div>
-        
+
         
         
         <div class="statsContainer">
@@ -52,10 +55,17 @@
             <button id="addList">+</button>
         </div>
         <ol class="notCompleted" id="unchecked">
-            
-          
+         
         </ol>
-        
+    </div>
+    
+    <div class="popup">
+        <div class="popup-content">
+            <img src="https://static.vecteezy.com/system/resources/previews/018/887/462/original/signs-close-icon-png.png" alt="Close" class="close">
+            <h2>Timer</h2>
+            <input type="text" placeholder="시간(분)을 입력하세요.">
+            <button id="saveClose">Save&Close</button>
+        </div>
     </div>
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>

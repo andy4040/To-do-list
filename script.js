@@ -118,9 +118,9 @@ document.getElementById("settingBtn").addEventListener("click",function(){
     document.querySelector(".popup").style.display= "flex";
 })
 
-document.querySelector(".close").addEventListener("click",function(){
-    document.querySelector(".popup").style.display= "none";
-})
+
+
+
 
 
 
@@ -238,11 +238,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-
-
-
-
 const blaskHappy=()=>{
     const count = 200,
       defaults = {
@@ -284,3 +279,29 @@ const blaskHappy=()=>{
           startVelocity: 45,
         });
 };
+
+
+
+function changeTime() {
+    const newInput = document.getElementById('timeVar');
+    focusTime = newInput.value;
+}
+document.querySelector(".close").addEventListener("click",function(){
+    document.querySelector(".popup").style.display= "none";
+})
+
+document.getElementById("saveClose").addEventListener("click",function(){
+    document.querySelector(".popup").style.display= "none";
+    changeTime();
+    clearTimer();
+    loadTimer(); 
+    updateDisplay(); 
+    updateTotalDisplay();
+    
+})
+
+
+
+
+
+

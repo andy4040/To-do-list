@@ -18,24 +18,8 @@ body{
     max-width:500px;
     margin:50px auto 0;
 }
-.setting{
-    width:100%;
-    
-    display: flex;
-    justify-content: flex-end;
-}
-.settingBtn{
-    position:relative;
-    float:right;
-    background-color: #fff;
-    color:black;
-    border-radius:10px;
-    text-decoration:none;
-    padding: 10px;
-    font-weight:bolder;
-    margin-right: 20px;
-    margin-top: 20px;
-}
+
+
 .timer{
     display: flex;
     align-items: center;
@@ -319,3 +303,39 @@ li button{
     border-color:white;
     color:white;
 }
+
+
+.settingContainer {
+    position: absolute; /* 절대 위치 지정 */
+    top: 20px; /* 상단 여백 */
+    right: 20px; /* 오른쪽 여백 */
+}
+
+.setting {
+    display: flex; /* Flexbox 사용 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    background-color: white; /* 배경색 흰색 */
+    padding: 10px; /* 내부 여백 */
+    border-radius: 10px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+
+#gear {
+    color: black; /* 아이콘 색상 */
+    margin-right: 5px; /* 텍스트와의 간격 */
+    font-size: 19px; /* 아이콘 크기 조정 */
+    cursor:pointer;
+}
+
+.settingBtn {
+    text-decoration: none; /* 텍스트 밑줄 제거 */
+    color: black; /* 텍스트 색상 */
+    font-weight: bold; /* 텍스트 두께 */
+    line-height: 24px; /* 아이콘과 동일한 높이로 설정 */
+}
+
+
+
+
+

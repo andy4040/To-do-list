@@ -16,7 +16,7 @@ window.onload = () => {
 };
 
 function loadTimer() {
-    
+    const storedFocustime = localStorage.getItem('focusTime');
     const storedMinutes = localStorage.getItem('focusMinutes');
     const storedSeconds = localStorage.getItem('seconds');
     const storedTotalTime=localStorage.getItem('totalTime');
@@ -32,10 +32,11 @@ function loadTimer() {
     totalTime = parseInt(storedTotalTime) || 0;
     totalHours = parseInt(storedTotalHours) || 0;
     totalMinutes = parseInt(storedTotalMinutes) || 0;
-   
+    focusMinutes= parseInt(storedFocustime) || 40;
 }
 
 function saveTimer() {
+    localStorage.setItem('focusTime', focusTime);
     localStorage.setItem('focusMinutes', focusMinutes);
     localStorage.setItem('seconds', seconds);
     localStorage.setItem('totalTime', totalTime);
@@ -122,7 +123,24 @@ gearIcon.addEventListener("click", function() {
     document.querySelector(".popup").style.display = "flex";
 });
 
+function changeTime() {
+    const newInput = document.getElementById('timeVar');
+    focusTime = newInput.value;
+}
+document.querySelector(".close").addEventListener("click",function(){
+    document.querySelector(".popup").style.display= "none";
+})
 
+document.getElementById("saveClose").addEventListener("click",function(){
+    document.querySelector(".popup").style.display= "none";
+    clearTimer();
+    changeTime();
+    saveTimer();
+    loadTimer(); 
+    updateDisplay(); 
+    updateTotalDisplay();
+    
+})
 
 
 
@@ -286,23 +304,7 @@ const blaskHappy=()=>{
 
 
 
-function changeTime() {
-    const newInput = document.getElementById('timeVar');
-    focusTime = newInput.value;
-}
-document.querySelector(".close").addEventListener("click",function(){
-    document.querySelector(".popup").style.display= "none";
-})
 
-document.getElementById("saveClose").addEventListener("click",function(){
-    document.querySelector(".popup").style.display= "none";
-    changeTime();
-    clearTimer();
-    loadTimer(); 
-    updateDisplay(); 
-    updateTotalDisplay();
-    
-})
 
 
 

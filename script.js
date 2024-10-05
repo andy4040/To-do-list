@@ -117,6 +117,10 @@ function reset() {
 document.getElementById("settingBtn").addEventListener("click",function(){
     document.querySelector(".popup").style.display= "flex";
 })
+const gearIcon = document.getElementById("gear");
+gearIcon.addEventListener("click", function() {
+    document.querySelector(".popup").style.display = "flex";
+});
 
 
 

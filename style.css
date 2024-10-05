@@ -100,16 +100,17 @@ body{
 }
 
 #progressBar{
+    
     background-color:white;
-    height: 10px;
-    margin-top: 10px;
+    height: 20px;
+    margin-top: 30px;
     border-radius:10px;
     border:1px solid red;   
 }
 
 #progress{
     width: 0%;
-    height: 10px;
+    height: 19px;
     background-color:red;
     border-radius:10px;
     transition: all 0.7s ease;

@@ -53,8 +53,12 @@ function clearTimer() {
 function updateDisplay() {
     document.getElementById('minutes').innerHTML = focusMinutes;
     document.getElementById('seconds').innerHTML = seconds < 10 ? '0' + seconds : seconds;
-    document.title = `${focusMinutes}분 ${seconds < 10 ? '0' + seconds : seconds}초`;
 }
+
+function updateTitle() {
+    document.title = `${focusMinutes}분 ${seconds < 10 ? '0' + seconds : seconds}초 - To do list`;
+}
+
 function updateTotalDisplay() {
     document.getElementById('totalTime').innerHTML = totalHours+"시간 "+ totalMinutes +"분";
 }
@@ -91,6 +95,7 @@ function start() {
         }
 
         updateDisplay(); 
+        updateTitle();
         updateTotalDisplay();
         saveTimer(); 
     }, 1000); 
@@ -110,6 +115,7 @@ function reset() {
     focusMinutes = focusTime;
     seconds = 0;
     updateDisplay(); 
+    updateTitle();
     clearTimer();
     alarmSound.pause();
     alarmSound.currentTime = 0;
@@ -138,6 +144,7 @@ document.getElementById("saveClose").addEventListener("click",function(){
     saveTimer();
     loadTimer(); 
     updateDisplay(); 
+    updateTitle();
     updateTotalDisplay();
     
 })
@@ -245,9 +252,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateStats() {
         const completedLists = lists.filter(list => list.checked).length;
         const totalLists = lists.length;
-        const progress = totalLists ? (completedLists / totalLists) * 100 : 0;
+        const progress = totalLists ? completedLists / totalLists : 0;
         const progressBar = document.getElementById('progress');
-        progressBar.style.width = `${progress}%`;
+        progressBar.style.width = `${progress * 100}%`;
         if (totalLists && completedLists === totalLists) {
             blaskHappy();
         }

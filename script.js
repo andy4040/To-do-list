@@ -56,7 +56,7 @@ function updateDisplay() {
 }
 
 function updateTitle() {
-    document.title = `To do list - ${focusMinutes}분 ${seconds < 10 ? '0' + seconds : seconds}초`;
+    document.title = `오늘 할 일 - ${focusMinutes}분 ${seconds < 10 ? '0' + seconds : seconds}초`;
 }
 
 function updateTotalDisplay() {
